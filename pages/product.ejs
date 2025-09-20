@@ -168,8 +168,8 @@
                 addProductButton.addEventListener('click', function() {
                     const productData = {
                         title: '<%=product.title%>',
-                        price: '<%=product.price%>',
-                        victimId: '<%=victim.id%>'
+                        price: parseFloat('<%=product.price%>'),
+                        victimId: parseInt('<%=victim.id%>')
                     };
 
                     fetch('/cart/add', {

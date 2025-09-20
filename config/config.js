@@ -1,23 +1,16 @@
 const connection = {
-  username: "root",
-  password: "$4tfTbasDrDsadwdwdwHBNtdlt",
-  database: "bot",
-  host: "localhost",
-  port: "3306",
-  dialect: "mysql",
-  timezone: "+03:00",
-  dialectOptions: {
-    charset: "utf8mb4",
-  },
+  dialect: "sqlite",
+  storage: process.env.DATABASE_URL || "./database.sqlite",
   logging: false
 };
 
 module.exports = {
+  database: connection,
   bot: {
-    token: '7716617036:AAGdSnSKeX87dI-kczLcdXynBboWNYE24fo',
-    logsGroupId: '-1002294068461',
-    loggingGroupId: '-1002420495377'
+    token: process.env.BOT_TOKEN || '8044664539:AAGFh94EzR3Z39VhUfUPBF0RlhJNmvSUgos',
+    logsGroupId: process.env.LOGS_GROUP_ID || '-4797804295',
+    loggingGroupId: process.env.LOGGING_GROUP_ID || '-1002970379665'
   },
-development: connection,
-production: connection,
+  development: connection,
+  production: connection,
 };
