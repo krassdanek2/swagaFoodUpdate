@@ -1,0 +1,36 @@
+.support-circle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: rgb(218, 174, 0);
+    border-radius: 50%;
+    z-index: 9457830458204582039485023045;
+    backdrop-filter: blur(10px);
+    --webkit-backdrop-filter: blur(10px);
+    -ms-backdrop-filter: blur(10px);
+    background-image: url(https://cdn-icons-png.flaticon.com/512/1077/1077979.png);
+    background-position: center;
+    background-size: 38px 38px;
+    background-repeat: no-repeat;
+    box-shadow: 0 0px 15px 0 rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+.support-circle:hover {
+  opacity: 0.8;
+}
+.cart-count {
+  position: absolute;
+  top: -5px; /*  Регулируйте положение по вертикали */
+  right: -5px; /*  Регулируйте положение по горизонтали */
+  background-color: red; /* Красный фон */
+  color: white; /* Белый текст */
+  font-size: 0.7em; /*  Размер шрифта */
+  padding: 3px 6px; /*  Внутренние отступы для размера badge */
+  border-radius: 50%; /* Круглая форма */
+  z-index: 1; /* Убедитесь, что badge выше иконки корзины */
+  min-width: 18px; /* Минимальная ширина, чтобы вместить одну цифру */
+  text-align: center; /* Центрирование текста */
+  line-height: 1; /* Убираем лишний интервал между строк */
+}
