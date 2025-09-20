@@ -3,7 +3,20 @@ require('dotenv').config();
 // Инициализация базы данных при запуске
 async function initDatabase() {
     try {
+        console.log('🔄 Подключение к базе данных...');
+        console.log('📍 Railway Environment:', process.env.RAILWAY_ENVIRONMENT);
+        console.log('📍 Database URL:', process.env.DATABASE_URL ? 'SET' : 'NOT SET');
+        console.log('📍 Database Public URL:', process.env.DATABASE_PUBLIC_URL ? 'SET' : 'NOT SET');
+        
         const { sequelize, Products } = require('./models');
+        
+        // Проверяем подключение
+        await sequelize.authenticate();
+        console.log('✅ Подключение к базе данных установлено');
+        
+        // Синхронизируем таблицы
+        await sequelize.sync();
+        console.log('✅ Таблицы синхронизированы');
         
         // Проверяем, есть ли продукты в базе
         const productCount = await Products.count();
@@ -30,8 +43,15 @@ async function initDatabase() {
             console.log('✅ База данных уже инициализирована');
         }
     } catch (error) {
-        console.error('❌ Ошибка инициализации базы данных:', error);
-        // Не останавливаем приложение, продолжаем работу
+        console.error('❌ Ошибка инициализации базы данных:', error.message);
+        console.error('📋 Полная ошибка:', error);
+        
+        // На Railway продолжаем работу даже с ошибкой БД
+        if (process.env.RAILWAY_ENVIRONMENT) {
+            console.log('⚠️ Продолжаем работу без базы данных на Railway');
+        } else {
+            throw error;
+        }
     }
 }
 

@@ -5,10 +5,10 @@ const isRailway = process.env.RAILWAY_ENVIRONMENT;
 const connection = isRailway ? {
   // PostgreSQL для Railway
   dialect: "postgres",
-  url: process.env.DATABASE_PUBLIC_URL || "postgresql://postgres:QxOwTwjYiQVTuFrMArNlatwMeobYzfwa@nozomi.proxy.rlwy.net:12628/railway",
+  url: process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL,
   logging: false,
   dialectOptions: {
-    ssl: {
+    ssl: process.env.DATABASE_URL ? false : {
       require: true,
       rejectUnauthorized: false
     }
