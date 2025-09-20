@@ -1,6 +1,22 @@
-const connection = {
+// Локальная разработка - SQLite, Railway - PostgreSQL
+const isProduction = process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT;
+const isRailway = process.env.RAILWAY_ENVIRONMENT;
+
+const connection = isRailway ? {
+  // PostgreSQL для Railway
+  dialect: "postgres",
+  url: process.env.DATABASE_URL,
+  logging: false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+} : {
+  // SQLite для локальной разработки
   dialect: "sqlite",
-  storage: process.env.DATABASE_URL || "./database.sqlite",
+  storage: "./database.sqlite",
   logging: false
 };
 
