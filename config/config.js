@@ -5,13 +5,10 @@ const isRailway = process.env.RAILWAY_ENVIRONMENT;
 const connection = isRailway ? {
   // PostgreSQL для Railway
   dialect: "postgres",
-  url: process.env.DATABASE_URL || process.env.DATABASE_PUBLIC_URL,
+  url: process.env.DATABASE_URL,
   logging: false,
   dialectOptions: {
-    ssl: process.env.DATABASE_URL ? false : {
-      require: true,
-      rejectUnauthorized: false
-    }
+    ssl: false
   }
 } : {
   // SQLite для локальной разработки
