@@ -5,12 +5,18 @@ const isProduction = process.env.NODE_ENV === 'production' || process.env.RAILWA
 const isRailway = process.env.RAILWAY_ENVIRONMENT;
 
 const mongoUrl = isRailway ? 
-  process.env.MONGODB_URL || process.env.DATABASE_URL :
+  process.env.MONGO_URL || process.env.MONGODB_URL || process.env.DATABASE_URL :
   'mongodb://localhost:27017/burgerking';
 
 // Подключение к MongoDB
 async function connectMongoDB() {
   try {
+    console.log('🔄 Подключение к MongoDB...');
+    console.log('📍 MONGO_URL:', process.env.MONGO_URL ? 'SET' : 'NOT SET');
+    console.log('📍 MONGODB_URL:', process.env.MONGODB_URL ? 'SET' : 'NOT SET');
+    console.log('📍 DATABASE_URL:', process.env.DATABASE_URL ? 'SET' : 'NOT SET');
+    console.log('📍 Using URL:', mongoUrl);
+    
     await mongoose.connect(mongoUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
