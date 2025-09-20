@@ -1,19 +1,9 @@
-// Локальная разработка - SQLite, Railway - PostgreSQL
+// Локальная разработка - SQLite, Railway - MongoDB
 const isProduction = process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT;
 const isRailway = process.env.RAILWAY_ENVIRONMENT;
 
-const connection = isRailway ? {
-  // PostgreSQL для Railway
-  dialect: "postgres",
-  url: process.env.DATABASE_PUBLIC_URL || process.env.DATABASE_URL,
-  logging: false,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  }
-} : {
+// Для совместимости с Sequelize (будет использоваться только локально)
+const connection = {
   // SQLite для локальной разработки
   dialect: "sqlite",
   storage: "./database.sqlite",
