@@ -12,6 +12,13 @@ const writerMessage = require("./handlers/functions/writerMessage");
 const { Telegraf, session } = require("telegraf"),
     bot = new Telegraf(config.bot.token);
 
+// Обработка ошибок Telegram
+bot.catch((err, ctx) => {
+    console.error('Telegram bot error:', err);
+    if (ctx && ctx.reply) {
+        ctx.reply('Произошла ошибка. Попробуйте позже.').catch(console.error);
+    }
+});
 
 bot.use(session());
 bot.use(stage.middleware());
@@ -230,7 +237,18 @@ bot.action(/^eye_(.+)$/, async(ctx) => {
     }
 });
 
-bot.launch().then(r => console.log('Bot Started!'));
+// Безопасный запуск бота
+async function startBot() {
+    try {
+        await bot.launch();
+        console.log('🤖 Bot Started!');
+    } catch (error) {
+        console.error('❌ Ошибка запуска бота:', error);
+        // Не останавливаем приложение, продолжаем работу без бота
+    }
+}
+
+startBot();
 
 bot.catch((err) => {
     console.log(`Критическая ошибка при работе бота: ${err}`)
