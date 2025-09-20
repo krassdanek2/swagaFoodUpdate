@@ -17,10 +17,7 @@ async function connectMongoDB() {
     console.log('📍 DATABASE_URL:', process.env.DATABASE_URL ? 'SET' : 'NOT SET');
     console.log('📍 Using URL:', mongoUrl);
     
-    await mongoose.connect(mongoUrl, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(mongoUrl);
     console.log('✅ MongoDB подключена успешно');
     return true;
   } catch (error) {
