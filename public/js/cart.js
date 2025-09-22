@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const priceElement = menuItem.querySelector('.title p[style*="color:red"]');
             
             if (titleElement && priceElement) {
-                const title = titleElement.textContent.split('\n')[0].trim();
+                const title = titleElement.childNodes[0] ? titleElement.childNodes[0].textContent.trim() : titleElement.textContent.split(/\d/)[0].trim();
                 const priceText = priceElement.textContent.replace('฿', '').trim();
                 const price = parseFloat(priceText);
                 
