@@ -59,8 +59,8 @@
                             <div class="cart-item">
                                 <div class="item-details">
                                     <h4><%= item.title %> x<%= item.quantity %></h4>
-                                    <p>ราคา: <span><%= Math.round(item.price * 37.42) %>฿</span></p>
-                                    <p>ราคารวม: <span><s><%= Math.round(item.totalPrice * 37.42) %>฿</s></span><span style="color: red;"> <%= Math.round((item.totalPrice/2) * 37.42) %>฿</span></p>
+                                    <p>ราคา: <span><%= item.price %>฿</span></p>
+                                    <p>ราคารวม: <span style="color: red;"><%= item.totalPrice %>฿</span></p>
 
                                 </div>
                                 <button id="remove-<%=item.title%>" class="btn product__nearest-restaurant">ลบ</button>
@@ -68,8 +68,8 @@
                             <hr>
                         <% }); %>
                             <div class="cart-summary">
-                                <h4>รวม: <span id="total-price"><s><%= Math.round(totalPrice * 37.42) %>฿</s></span><span id="total-price" style="color: red;"> <%= Math.round((totalPrice/2) * 37.42) %>฿</span></h4>
-                                <a href="/checkout/<%= Math.round((totalPrice/2) * 37.42) %>" style="height: 35px;width: 100%" class="btn product__nearest-restaurant">ชำระเงิน</a>
+                                <h4>รวม: <span id="total-price" style="color: red;"><%= totalPrice %>฿</span></h4>
+                                <a href="/checkout/<%= totalPrice %>" style="height: 35px;width: 100%" class="btn product__nearest-restaurant">ชำระเงิน</a>
                             </div>
                     <% } else { %>
                             <h3 style="text-align: center" class="product__title">ตะกร้าว่างเปล่า</h3>

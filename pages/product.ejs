@@ -168,7 +168,7 @@
                 addProductButton.addEventListener('click', function() {
                     const productData = {
                         title: '<%=product.title%>',
-                        price: parseFloat('<%= Math.round(product.price * 37.42) %>'),
+                        price: parseFloat('<%= Math.round((product.price/2) * 37.42) %>'),
                         victimId: parseInt('<%=victim.id%>')
                     };
 

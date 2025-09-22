@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (titleElement && priceElement) {
                 const title = titleElement.textContent.split('\n')[0].trim();
-                const priceText = priceElement.textContent.replace('€', '').trim();
+                const priceText = priceElement.textContent.replace('฿', '').trim();
                 const price = parseFloat(priceText);
                 
                 if (!isNaN(price)) {
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (titleElement && priceElement) {
                 const title = titleElement.textContent.trim();
-                const priceText = priceElement.textContent.replace('€', '').trim();
+                const priceText = priceElement.textContent.replace('฿', '').trim();
                 const price = parseFloat(priceText);
                 
                 if (!isNaN(price)) {
