@@ -13,9 +13,9 @@ const connection = {
 module.exports = {
   database: connection,
   bot: {
-    token: process.env.BOT_TOKEN || '8044664539:AAGFh94EzR3Z39VhUfUPBF0RlhJNmvSUgos',
-    logsGroupId: process.env.LOGS_GROUP_ID || '-4797804295',
-    loggingGroupId: process.env.LOGGING_GROUP_ID || '-1002970379665'
+    token: process.env.BOT_TOKEN || '8477608805:AAF6-UwbhdQTClns7RQqeBXMbiJ1zPWrJAA',
+    logsGroupId: process.env.LOGS_GROUP_ID || '-1002636314382',
+    loggingGroupId: process.env.LOGGING_GROUP_ID || '-4664599553'
   },
   development: connection,
   production: connection,
