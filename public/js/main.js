@@ -437,11 +437,11 @@ return fix;
 
       if ($(this).hasClass('future') && choosed_date < today && choosed_date != '') {
         $(this).val('');
-        alert('Chosen date is in the past!');
+        alert('วันที่ที่เลือกอยู่ในอดีต!');
         return false;
       } else if ($(this).hasClass('past') && choosed_date > today && choosed_date != today && choosed_date != '') {
         $(this).val('');
-        alert('Chosen date is in the future!');
+        alert('วันที่ที่เลือกอยู่ในอนาคต!');
       }
     });
   }

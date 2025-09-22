@@ -116,10 +116,10 @@
 
                 <div>
                     <p class="product__info-preview"></p>
-                    <a href="#" class="product__info-btn">Nutritional Information</a>
+                    <a href="#" class="product__info-btn">ข้อมูลโภชนาการ</a>
                 </div>
 
-                <a href="#" id="add_product" class="btn btn--wide product__nearest-restaurant">Add to cart - <%= (product.price/2).toFixed(3) %>€</a>
+                <a href="#" id="add_product" class="btn btn--wide product__nearest-restaurant">เพิ่มลงตะกร้า - <%= (product.price/2).toFixed(3) %>€</a>
 
                 <div class="product__content"><div class="">
                         <div class="">
@@ -133,7 +133,7 @@
     <div class="modal modal-info">
         <div class="modal__inner">
             <a href="#" class="modal__close"><span></span></a>
-            <h4 class="modal-info__title">Nutritional Info &amp; Allergens</h4>
+            <h4 class="modal-info__title">ข้อมูลโภชนาการและสารก่อภูมิแพ้</h4>
             <div class="modal-info__image"><%-product.photo%></div>
             <h4 class="modal-info__name"><%=product.title%></h4>
             <%-product.composition%>
@@ -152,7 +152,7 @@
             <a href="#" class="modal___close"><span></span></a>
             <div class="modal-info__image"><%-product.photo%></div>
             <h4 class="modal-info__name"><%-product.title%></h4>
-            <a href="/cart" style="height: 35px;width: 100%" class="btn product__nearest-restaurant">Basket</a>
+            <a href="/cart" style="height: 35px;width: 100%" class="btn product__nearest-restaurant">ตะกร้า</a>
 
         </div>
     </div>

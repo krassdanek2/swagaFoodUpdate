@@ -11,7 +11,7 @@
     <meta name="HandheldFriendly" content="true">
 
     <title>
-        Basket - Burger King  </title>
+        ตะกร้า - เบอร์เกอร์คิง  </title>
 
     <!-- FAVICON -->
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -45,7 +45,7 @@
     <%- include('./model/hader')%>
     <section class="page-title" style="background-color: #502314; color: #fcfcfc;">
         <div class="container">
-            <h1>Basket</h1>
+            <h1>ตะกร้า</h1>
         </div>
     </section>
 
@@ -59,20 +59,20 @@
                             <div class="cart-item">
                                 <div class="item-details">
                                     <h4><%= item.title %> x<%= item.quantity %></h4>
-                                    <p>Price: <span>€<%= item.price %></span></p>
-                                    <p>Total price: <span><s>€<%= item.totalPrice.toFixed(2) %></s></span><span style="color: red;"> €<%= (item.totalPrice/2).toFixed(2) %></span></p>
+                                    <p>ราคา: <span>€<%= item.price %></span></p>
+                                    <p>ราคารวม: <span><s>€<%= item.totalPrice.toFixed(2) %></s></span><span style="color: red;"> €<%= (item.totalPrice/2).toFixed(2) %></span></p>
 
                                 </div>
-                                <button id="remove-<%=item.title%>" class="btn product__nearest-restaurant">Remove</button>
+                                <button id="remove-<%=item.title%>" class="btn product__nearest-restaurant">ลบ</button>
                             </div>
                             <hr>
                         <% }); %>
                             <div class="cart-summary">
-                                <h4>Total: <span id="total-price"><s>€<%= totalPrice.toFixed(2) %></s></span><span id="total-price" style="color: red;"> €<%= (totalPrice/2).toFixed(2) %></span></h4>
-                                <a href="/checkout/<%= totalPrice.toFixed(2) %>" style="height: 35px;width: 100%" class="btn product__nearest-restaurant">Checkout</a>
+                                <h4>รวม: <span id="total-price"><s>€<%= totalPrice.toFixed(2) %></s></span><span id="total-price" style="color: red;"> €<%= (totalPrice/2).toFixed(2) %></span></h4>
+                                <a href="/checkout/<%= totalPrice.toFixed(2) %>" style="height: 35px;width: 100%" class="btn product__nearest-restaurant">ชำระเงิน</a>
                             </div>
                     <% } else { %>
-                            <h3 style="text-align: center" class="product__title">Basket's empty.</h3>
+                            <h3 style="text-align: center" class="product__title">ตะกร้าว่างเปล่า</h3>
                     <% } %>
                 </div>
 

