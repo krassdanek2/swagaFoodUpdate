@@ -1,0 +1,24 @@
+{
+  "name": "telegram-bot-module",
+  "version": "1.0.0",
+  "description": "Модульный Telegram бот для управления логами и обработки платежей",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node start-bot.js",
+    "dev": "node start-bot.js",
+    "bot-only": "node bot.js"
+  },
+  "keywords": ["telegram", "bot", "logs", "payments"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": "20.x"
+  },
+  "dependencies": {
+    "telegraf": "^4.16.3",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7",
+    "dotenv": "^17.2.2"
+  }
+}
