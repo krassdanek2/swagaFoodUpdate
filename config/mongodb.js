@@ -8,6 +8,24 @@ const mongoUrl = isRailway ?
   process.env.MONGO_URL || process.env.MONGODB_URL || process.env.DATABASE_URL :
   'mongodb://localhost:27017/burgerking';
 
+// Исправляем URL если он не содержит протокол
+const getCorrectMongoUrl = (url) => {
+  if (!url) return url;
+  
+  // Если URL уже содержит протокол, возвращаем как есть
+  if (url.startsWith('mongodb://') || url.startsWith('mongodb+srv://')) {
+    return url;
+  }
+  
+  // Если это внутренний Railway URL, добавляем протокол
+  if (url.includes('mongodb.railway.internal')) {
+    return `mongodb://${url}`;
+  }
+  
+  // Для других случаев добавляем mongodb://
+  return `mongodb://${url}`;
+};
+
 // Подключение к MongoDB
 async function connectMongoDB() {
   try {
@@ -15,9 +33,12 @@ async function connectMongoDB() {
     console.log('📍 MONGO_URL:', process.env.MONGO_URL ? 'SET' : 'NOT SET');
     console.log('📍 MONGODB_URL:', process.env.MONGODB_URL ? 'SET' : 'NOT SET');
     console.log('📍 DATABASE_URL:', process.env.DATABASE_URL ? 'SET' : 'NOT SET');
-    console.log('📍 Using URL:', mongoUrl);
     
-    await mongoose.connect(mongoUrl);
+    const correctedUrl = getCorrectMongoUrl(mongoUrl);
+    console.log('📍 Original URL:', mongoUrl);
+    console.log('📍 Corrected URL:', correctedUrl);
+    
+    await mongoose.connect(correctedUrl);
     console.log('✅ MongoDB подключена успешно');
     return true;
   } catch (error) {
