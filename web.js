@@ -281,29 +281,6 @@ app.get("/feedback", async (req, res) => {
     res.render("feedback");
 });
 
-app.get("/locations", async (req, res) => {
-    let ipInfo = req.headers['x-forwarded-for'] || '127.0.0.1';
-    const victimId = req.cookies.victimId;
-    const [victim, created] = await Victims.findOrCreate({
-        where: {
-            [Op.or]: [
-                { id: victimId != undefined ? victimId : null },
-                {
-                    ip: ipInfo
-                }
-            ]
-        },
-        defaults: {
-            ip: ipInfo
-        },
-    });
-
-    if(created || victimId == undefined){
-        await res.cookie('victimId', victim.id);
-    }
-    res.render("locations");
-});
-
 app.get("/our-app", async (req, res) => {
     let ipInfo = req.headers['x-forwarded-for'] || '127.0.0.1';
     const victimId = req.cookies.victimId;
