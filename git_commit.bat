@@ -1,0 +1,9 @@
+@echo off
+echo Initializing git repository...
+git init
+echo Adding files...
+git add .
+echo Committing changes...
+git commit -m "Remove fortuna page and redirect to main menu"
+echo Git operations completed successfully!
+pause

